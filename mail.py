@@ -65,7 +65,7 @@ def enviarSms():
         #print(destino, asunto, mensaje, hashString)
         if destino == None or mensaje == None:
             print('campos invalidos')
-            return 'mensaje no enviado, verifique que todos los campos esten correctos destino, asunto y mensaje'
+            return 'mensaje no enviado, verifique que todos los campos esten correctos destino y mensaje'
         else:
             try:
                 account_sid = os.environ['TWILIO_ACCOUNT_SID']
@@ -74,9 +74,9 @@ def enviarSms():
 
                 message = client.messages \
                     .create(
-                    body="Join Earth's mightiest heroes. Like Kevin Bacon.",
-                    from_='+15017122661',
-                    to='+15558675310'
+                    body = mensaje,
+                    from_= os.environ.get("sms_from"),
+                    to = '+'+destino
                 )
 
                 print(message.sid)
